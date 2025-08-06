@@ -1,5 +1,0 @@
-sprint-mission-3/node_modules
-# Keep environment variables out of version control
-sprint-mission-3/.env
-
-sprint-mission-3/generated/prisma
