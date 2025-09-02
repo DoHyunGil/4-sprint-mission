@@ -13,3 +13,44 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        Int      @unique @default(autoincrement())
+  email     String
+  nickname  String
+  image     String
+  password  String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Product {
+  id          Int       @id @unique @default(autoincrement())
+  name        String    @unique
+  description String?
+  tags        String[]
+  price       Decimal   @db.Decimal(10, 2)
+  createdAt   DateTime  @default(now())
+  updateAt    DateTime  @updatedAt
+  comments    Comment[]
+}
+
+model Article {
+  id        Int       @id @unique @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime  @default(now())
+  comments  Comment[]
+}
+
+model Comment {
+  id        Int      @id @unique @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+
+  Product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int?
+  Article   Article? @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId Int?
+}
+

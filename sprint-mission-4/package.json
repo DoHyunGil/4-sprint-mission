@@ -12,6 +12,7 @@
   "dependencies": {
     "@prisma/client": "^6.15.0",
     "express": "^5.1.0",
+    "http-error": "^0.0.6",
     "prisma": "^6.15.0"
   }
 }
