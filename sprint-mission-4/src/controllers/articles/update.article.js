@@ -1,0 +1,18 @@
+import prisma from "../../../lib/prisma";
+
+const updateArticle = async (req, res, next) => {
+  const reqId = Number(req.params.id);
+
+  try {
+    const result = await prisma.article.update({
+      where: { id: reqId },
+      data: req.body,
+    });
+
+    res.status(200).send(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default updateArticle;

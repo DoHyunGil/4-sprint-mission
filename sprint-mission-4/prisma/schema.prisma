@@ -15,13 +15,15 @@ datasource db {
 }
 
 model User {
-  id        Int      @unique @default(autoincrement())
-  email     String
-  nickname  String
-  image     String
-  password  String
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  id           Int       @id @unique @default(autoincrement())
+  email        String
+  nickname     String
+  image        String
+  password     String
+  createdAt    DateTime  @default(now())
+  updateAt     DateTime  @updatedAt
+  likeProducts Product[]
+  likeArticles Article[]
 }
 
 model Product {
@@ -33,14 +35,16 @@ model Product {
   createdAt   DateTime  @default(now())
   updateAt    DateTime  @updatedAt
   comments    Comment[]
+  likedUsers  User[]
 }
 
 model Article {
-  id        Int       @id @unique @default(autoincrement())
-  title     String
-  content   String
-  createdAt DateTime  @default(now())
-  comments  Comment[]
+  id         Int       @id @unique @default(autoincrement())
+  title      String
+  content    String
+  createdAt  DateTime  @default(now())
+  comments   Comment[]
+  likedUsers User[]
 }
 
 model Comment {
@@ -53,4 +57,3 @@ model Comment {
   Article   Article? @relation(fields: [articleId], references: [id], onDelete: Cascade)
   articleId Int?
 }
-

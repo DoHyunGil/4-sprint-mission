@@ -1,5 +1,5 @@
-import { hashPassword } from "../../lib/password.js";
-import prisma from "../../lib/prisma.js";
+import { hashPassword } from "../../../lib/password.js";
+import prisma from "../../../lib/prisma.js";
 
 export async function createUser(req, res, next) {
   const { email, nickname, password } = req.body;

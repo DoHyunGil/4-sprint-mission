@@ -4,10 +4,13 @@ import * as productValidation from "../schemas/product.js";
 import * as commentValidation from "../schemas/comment.js";
 import createError from "http-error";
 import upload from "../../middlewares/multer.js";
+import passport from "../../lib/passport/index.js";
 
 const router = express.Router();
 const prisma = new PrismaClient();
 const db = prisma.product;
+
+router.use(passport.authorize("access-token", { session: false }));
 
 //#region POST
 router.post(

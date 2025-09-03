@@ -9,7 +9,7 @@ const accessTokenOptions = {
 
 const refreshTokenOptions = {
   jwtFromRequest: (req) => req.cookies[TOKEN.REFRESH_TOKEN_COOKIE_NAME],
-  secretOrKey: TOKEN.REFRESH_TOKEN_COOKIE_NAME,
+  secretOrKey: TOKEN.JWT_REFRESH_TOKEN_SECRET,
 };
 
 async function jwtVerify(payload, done) {
@@ -19,7 +19,7 @@ async function jwtVerify(payload, done) {
     });
     done(null, user);
   } catch (err) {
-    done(error, false);
+    done(err, false);
   }
 }
 
