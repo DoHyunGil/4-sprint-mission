@@ -24,6 +24,7 @@ const passports = {
   local: passport.authenticate("local", { session: false }),
   jwtAccess: passport.authenticate(TOKEN.ACCESS_TOKEN_COOKIE_NAME, {
     session: false,
+    failureRedirect: "/user/refresh",
   }),
   jwtRefresh: passport.authenticate(TOKEN.REFRESH_TOKEN_COOKIE_NAME, {
     session: false,
