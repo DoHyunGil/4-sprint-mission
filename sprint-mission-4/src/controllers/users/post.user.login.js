@@ -7,21 +7,32 @@ import {
   refreshTokenOption,
 } from "../../../lib/cookie-options.js";
 import TOKEN from "../../../lib/constants/jwt.tokens.js";
+import passport from "../../../lib/passport/index.js";
 
 export function loginUser(req, res, next) {
-  if (!req.user) {
-    return res.status(401).json({ message: "비인가" });
-  }
+  passport.authenticate("local", { session: false }, (err, user, info) => {
+    console.log("로그인 시도");
+    if (err) return next(err);
+    if (!user)
+      return res.status(401).json({ message: "로그인 실패, 유저 없음" });
+    req.user = user;
 
-  setTokenCookies(
-    res,
-    generateAccessToken(req.user),
-    generateRefreshToken(req.user)
-  );
+    const accessHeader = generateAccessToken(req.user);
+    const refreshHeader = generateRefreshToken(req.user);
 
-  res.status(200).json({ message: "로그인" });
+    setTokenCookies(res, accessHeader, refreshHeader);
+
+    res.status(200).json({
+      message: "로그인",
+      data: {
+        accessHeader: accessHeader,
+        refreshHeader: refreshHeader,
+      },
+    });
+  })(req, res, next);
 }
 export function logoutUser(req, res, next) {
+  console.log("유저 정보 수신 : " + req.user.id);
   if (!req.user) {
     return res.status(401).json({ message: "비인가" });
   }

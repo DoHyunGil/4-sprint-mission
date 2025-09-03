@@ -13,6 +13,10 @@ POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-    "email":"test@test.com",
-    "password":"password"
+    "email": "test@test.com",
+    "password": "password"
 }
+
+### 로그아웃
+POST http://localhost:3000/users/logout
+Cookie: access-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU2ODg3ODk2LCJleHAiOjE3NTY4OTE0OTZ9.XJoQwepd58sAV_-1THWXkDvZXy11pcj0HU5W23J5uas

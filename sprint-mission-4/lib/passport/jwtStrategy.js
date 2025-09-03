@@ -14,8 +14,9 @@ const refreshTokenOptions = {
 
 async function jwtVerify(payload, done) {
   try {
+    console.log("jwt 인증 시작, payload : " + payload.id);
     const user = await prisma.user.findUnique({
-      where: { id: payload.sub },
+      where: { id: payload.id },
     });
     done(null, user);
   } catch (err) {
