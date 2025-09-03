@@ -20,4 +20,6 @@ const articleApi = {
   deleteArticleComment,
 };
 
+Object.freeze(articleApi);
+
 export default articleApi;

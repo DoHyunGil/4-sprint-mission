@@ -1,0 +1,17 @@
+import prisma from "../../../lib/prisma";
+
+const deleteProductComment = async (req, res, next) => {
+  const reqId = Number(req.params.id);
+
+  try {
+    await prisma.comment.delete({
+      where: { id: reqId },
+    });
+
+    res.status(200).json({ message: "Delete Success" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default deleteProductComment;
