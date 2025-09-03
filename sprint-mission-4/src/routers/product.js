@@ -14,7 +14,7 @@ router.post(
   "/",
   productValidation.create,
   upload.single("Image"),
-  async (req, res) => {
+  async (req, res, next) => {
     try {
       const product = await db.create({
         data: req.body,
