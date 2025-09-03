@@ -15,15 +15,16 @@ datasource db {
 }
 
 model User {
-  id           Int       @id @unique @default(autoincrement())
-  email        String
-  nickname     String
-  image        String
-  password     String
-  createdAt    DateTime  @default(now())
-  updateAt     DateTime  @updatedAt
-  likeProducts Product[]
-  likeArticles Article[]
+  id             Int       @id @unique @default(autoincrement())
+  email          String
+  nickname       String
+  image          String
+  password       String
+  createdAt      DateTime  @default(now())
+  updateAt       DateTime  @updatedAt
+  postedProducts Product[] @relation(name: "postedProduct")
+  likeProducts   Product[] @relation(name: "likedProduct")
+  likeArticles   Article[]
 }
 
 model Product {
@@ -35,7 +36,9 @@ model Product {
   createdAt   DateTime  @default(now())
   updateAt    DateTime  @updatedAt
   comments    Comment[]
-  likedUsers  User[]
+  likedUsers  User[]    @relation(name: "likedProduct")
+  postUser    User      @relation(fields: [postUserId], references: [id], name: "postedProduct")
+  postUserId  Int
 }
 
 model Article {

@@ -3,7 +3,12 @@ import prisma from "../../../lib/prisma";
 const createProduct = async (req, res, next) => {
   try {
     const product = await prisma.product.create({
-      data: req.body,
+      data: {
+        ...req.body,
+        postedUser: {
+          id: req.user.id,
+        },
+      },
     });
 
     if (req.file) {

@@ -1,7 +1,7 @@
 import express from "express";
 import * as dotenv from "dotenv";
-import ProductRouter from "./src/routes/product.js";
-import ArticleRouter from "./src/routes/article.js";
+import ProductRouter from "./src/routers/product.js";
+import ArticleRouter from "./src/routers/article.js";
 import userRouter from "./src/routers/users.js";
 import ErrorHandler from "./middlewares/errorHandler.js";
 import cookieParser from "cookie-parser";
