@@ -2,14 +2,11 @@ import express from "express";
 import * as productValidation from "../schemas/product.js";
 import * as commentValidation from "../schemas/comment.js";
 import upload from "../../middlewares/multer.js";
-import passport from "../../lib/passport/index.js";
+import passports from "../../lib/passport/index.js";
 import API from "../controllers/products/index.js";
-import TOKEN from "../../lib/constants/jwt.tokens.js";
 
 const router = express.Router();
-const auth = passport.authorize(TOKEN.ACCESS_TOKEN_COOKIE_NAME, {
-  session: false,
-});
+const auth = passports.jwtAccess;
 router.post(
   "/",
   auth,

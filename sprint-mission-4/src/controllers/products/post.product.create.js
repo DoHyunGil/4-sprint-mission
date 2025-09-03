@@ -6,7 +6,9 @@ const createProduct = async (req, res, next) => {
       data: {
         ...req.body,
         postedUser: {
-          id: req.user.id,
+          connect: {
+            id: req.user.id,
+          },
         },
       },
     });

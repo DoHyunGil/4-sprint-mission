@@ -4,13 +4,10 @@ import * as articleValidation from "../schemas/article.js";
 import * as commentValidation from "../schemas/comment.js";
 import upload from "../../middlewares/multer.js";
 import API from "../controllers/articles/index.js";
-import passport from "../../lib/passport/index.js";
-import TOKEN from "../../lib/constants/jwt.tokens.js";
+import passports from "../../lib/passport/index.js";
 
 const router = express.Router();
-const auth = passport.authorize(TOKEN.ACCESS_TOKEN_COOKIE_NAME, {
-  session: false,
-});
+const auth = passports.jwtAccess;
 
 router.post(
   "/",

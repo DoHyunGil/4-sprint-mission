@@ -19,4 +19,15 @@ passport.use(TOKEN.REFRESH_TOKEN_COOKIE_NAME, refreshTokenStrategy);
 //   done(null, user);
 // });
 
-export default passport;
+const passports = {
+  passport: passport,
+  local: passport.authenticate("local", { session: false }),
+  jwtAccess: passport.authenticate(TOKEN.ACCESS_TOKEN_COOKIE_NAME, {
+    session: false,
+  }),
+  jwtRefresh: passport.authenticate(TOKEN.REFRESH_TOKEN_COOKIE_NAME, {
+    session: false,
+  }),
+};
+
+export default passports;

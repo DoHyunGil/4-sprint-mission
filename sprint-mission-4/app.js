@@ -5,7 +5,7 @@ import ArticleRouter from "./src/routers/article.js";
 import userRouter from "./src/routers/users.js";
 import ErrorHandler from "./middlewares/errorHandler.js";
 import cookieParser from "cookie-parser";
-import passport from "./lib/passport/index.js";
+import passports from "./lib/passport/index.js";
 
 dotenv.config(); // .env 파일 환경변수 적재
 
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(passport.initialize());
+app.use(passports.passport.initialize());
 
 app.use("/users", userRouter);
 app.use("/products", ProductRouter);
