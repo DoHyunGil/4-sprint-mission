@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import TOKEN from "./constants/jwt.tokens";
+import TOKEN from "./constants/jwt.tokens.js";
 
 export function generateAccessToken(user) {
   return jwt.sign({ id: user.id }, TOKEN.JWT_ACCESS_TOKEN_SECRET, {

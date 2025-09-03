@@ -5,6 +5,4 @@ const TOKEN = {
   REFRESH_TOKEN_COOKIE_NAME: "refresh-token",
 };
 
-Object.freeze(TOKEN);
-
 export default TOKEN;

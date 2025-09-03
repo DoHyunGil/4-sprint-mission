@@ -1,12 +1,12 @@
-import createArticleComment from "./post.article.comment.create";
-import createArticle from "./post.article.create";
-import getArticleDetail from "./get.article.detail";
-import getArticleList from "./get.article.list";
-import getArticleComment from "./get.article.comments";
-import updateArticle from "./update.article";
-import updateArticleComment from "./update.article.comment";
-import deleteArticle from "./delete.article";
-import deleteArticleComment from "./delete.article.comment";
+import createArticleComment from "./post.article.comment.create.js";
+import createArticle from "./post.article.create.js";
+import getArticleDetail from "./get.article.detail.js";
+import getArticleList from "./get.article.list.js";
+import getArticleComment from "./get.article.comments.js";
+import updateArticle from "./update.article.js";
+import updateArticleComment from "./update.article.comment.js";
+import deleteArticle from "./delete.article.js";
+import deleteArticleComment from "./delete.article.comment.js";
 
 const articleApi = {
   createArticleComment,

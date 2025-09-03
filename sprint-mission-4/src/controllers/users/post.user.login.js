@@ -1,9 +1,12 @@
-import { generateAccessToken, generateRefreshToken } from "../../lib/token.js";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from "../../../lib/token.js";
 import {
   accessTokenOption,
   refreshTokenOption,
-} from "../../lib/cookie-options.js";
-import TOKEN from "../../lib/constants/jwt.tokens.js";
+} from "../../../lib/cookie-options.js";
+import TOKEN from "../../../lib/constants/jwt.tokens.js";
 
 export function loginUser(req, res, next) {
   if (!req.user) {

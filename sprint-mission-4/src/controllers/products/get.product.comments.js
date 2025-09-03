@@ -1,4 +1,4 @@
-import prisma from "../../../lib/prisma";
+import prisma from "../../../lib/prisma.js";
 
 const getProductComments = async (req, res) => {
   const reqId = Number(req.params.id);
