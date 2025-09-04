@@ -11,4 +11,9 @@ router.post("/login", API.loginUser);
 router.post("/logout", jwt_auth, API.logoutUser);
 // router.get("/refresh");
 
+router.get("/profile", jwt_auth, API.getUserProfile);
+
+router.patch("/profile", jwt_auth, API.updateUserProfile);
+router.param("/password", jwt_auth, API.updateUserChangePassword);
+
 export default router;

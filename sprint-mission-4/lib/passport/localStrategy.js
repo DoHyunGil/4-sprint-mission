@@ -9,7 +9,7 @@ export const localStrategy = new LocalStrategy(
   },
   async (email, password, done) => {
     try {
-      console.log(`로그인 시도 : ${email}, ${password}`);
+      // console.log(`로그인 시도 : ${email}, ${password}`);
 
       const user = await prisma.user.findUnique({ where: { email: email } });
       if (!user) {
