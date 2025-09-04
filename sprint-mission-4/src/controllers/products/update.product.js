@@ -1,12 +1,12 @@
 import prisma from "../../../lib/prisma.js";
 
-const updateProduct = async (req, res) => {
+const updateProduct = async (req, res, next) => {
   const reqId = Number(req.params.id);
 
   try {
     const product = await prisma.product.update({
-      where: { id: reqId },
-      data: checkedData,
+      where: { id: reqId, ownerId: req.user.id },
+      data: req.body,
     });
 
     res.status(200).send(product);

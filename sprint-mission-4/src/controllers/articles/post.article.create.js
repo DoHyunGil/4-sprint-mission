@@ -3,14 +3,15 @@ import prisma from "../../../lib/prisma.js";
 const createArticle = async (req, res, next) => {
   try {
     const reqId = Number(req.params.id);
-    const article = await prisma.article.findUnique({ where: { id: reqId } });
-    if (!article)
-      return next(createError(400, "목표 데이터를 찾을 수 없습니다"));
 
-    const result = await prisma.comment.create({
+    const result = await prisma.article.create({
       data: {
-        content: req.body.content,
-        articleId: reqId,
+        ...req.body,
+        owner: {
+          connect: {
+            id: req.user.id,
+          },
+        },
       },
     });
 

@@ -17,6 +17,10 @@ async function jwtVerify(payload, done) {
     console.log("jwt 인증 시작, payload : " + payload.id);
     const user = await prisma.user.findUnique({
       where: { id: payload.id },
+      select: {
+        id: true,
+        email: true,
+      },
     });
     done(null, user);
   } catch (err) {

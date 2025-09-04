@@ -5,7 +5,7 @@ const updateProductComment = async (req, res, next) => {
 
   try {
     const result = await prisma.comment.update({
-      where: { id: reqId },
+      where: { id: reqId, ownerId: req.user.id },
       data: {
         content: req.body.content,
       },

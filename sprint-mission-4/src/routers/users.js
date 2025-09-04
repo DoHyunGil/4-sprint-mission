@@ -9,6 +9,6 @@ const jwt_auth = passports.jwtAccess;
 router.post("/register", API.createUser);
 router.post("/login", API.loginUser);
 router.post("/logout", jwt_auth, API.logoutUser);
-router.get("/refresh");
+// router.get("/refresh");
 
 export default router;

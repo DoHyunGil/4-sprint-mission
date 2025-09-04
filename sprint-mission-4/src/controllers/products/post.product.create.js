@@ -5,7 +5,7 @@ const createProduct = async (req, res, next) => {
     const product = await prisma.product.create({
       data: {
         ...req.body,
-        postedUser: {
+        owner: {
           connect: {
             id: req.user.id,
           },

@@ -15,16 +15,22 @@ datasource db {
 }
 
 model User {
-  id             Int       @id @unique @default(autoincrement())
-  email          String @unique
-  nickname       String
-  image          String?
-  password       String
-  createdAt      DateTime  @default(now())
-  updateAt       DateTime  @updatedAt
-  postedProducts Product[] @relation(name: "postedProduct")
-  likeProducts   Product[] @relation(name: "likedProduct")
-  likeArticles   Article[]
+  id       Int     @id @unique @default(autoincrement())
+  email    String  @unique
+  nickname String
+  image    String?
+  password String
+
+  myProducts   Product[] @relation(name: "myProducts")
+  likeProducts Product[] @relation(name: "likedProduct")
+
+  myArticles   Article[] @relation(name: "myArticles")
+  likeArticles Article[] @relation(name: "likeArticles")
+
+  myComments Comment[]
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
 }
 
 model Product {
@@ -36,24 +42,33 @@ model Product {
   createdAt   DateTime  @default(now())
   updateAt    DateTime  @updatedAt
   comments    Comment[]
-  likedUsers  User[]    @relation(name: "likedProduct")
-  postUser    User      @relation(fields: [postUserId], references: [id], name: "postedProduct")
-  postUserId  Int
+
+  owner   User @relation(fields: [ownerId], references: [id], name: "myProducts")
+  ownerId Int
+
+  likedUsers User[] @relation(name: "likedProduct")
 }
 
 model Article {
-  id         Int       @id @unique @default(autoincrement())
-  title      String
-  content    String
-  createdAt  DateTime  @default(now())
-  comments   Comment[]
-  likedUsers User[]
+  id        Int       @id @unique @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime  @default(now())
+  comments  Comment[]
+
+  owner   User @relation(fields: [ownerId], references: [id], name: "myArticles")
+  ownerId Int
+
+  likedUsers User[] @relation(name: "likeArticles")
 }
 
 model Comment {
   id        Int      @id @unique @default(autoincrement())
   content   String
   createdAt DateTime @default(now())
+
+  owner   User @relation(fields: [ownerId], references: [id])
+  ownerId Int
 
   Product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int?

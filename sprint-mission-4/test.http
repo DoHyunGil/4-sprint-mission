@@ -1,8 +1,8 @@
 @baseUrl=http://localhost:3000
 @accessTokenName=access-token
-@accessToken=
-@refreshTokenName=
-@refreshToken=
+@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU2OTQ5Mzk1LCJleHAiOjE3NTY5NTI5OTV9.5ZFdW-OZpcVrqzeA0go_pvAhP9Ywq1CC1bc1jzXA8cU
+@refreshTokenName=refresh-token
+@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU2OTQ5Mzk1LCJleHAiOjE3NTcwMzU3OTV9.SnJZtAPT2h7SMBFDs0yN3uL0hXf5maweIgVbb5SIM0g
 
 ### 회원가입
 POST {{baseUrl}}/users/register
@@ -30,12 +30,66 @@ Cookie: {{accessTokenName}}={{accessToken}}
 ### 상품 등록
 POST {{baseUrl}}/products
 Cookie: {{accessTokenName}}={{accessToken}}
+Content-Type: application/json
 
 {
     "name":"Test_Product",
     "description":"Test_Description",
-    "price":"10000",
-    "tags":[]
+    "price":10000,
+    "tags":["test_tag"]
 }
 
+### 상품 수정
+PATCH {{baseUrl}}/products/1
+Cookie: {{accessTokenName}}={{accessToken}}
+Content-Type: application/json
+
+{
+    "name":"Updated_Test_Product"
+}
+
+### 상품 덧글 작성
+POST {{baseUrl}}/products/comments/2
+Cookie: {{accessTokenName}}={{accessToken}}
+Content-Type: application/json
+
+{
+    "content":"Test_Comment"
+}
+
+###상품 삭제
+DELETE {{baseUrl}}/products/1
+Cookie: {{accessTokenName}}={{accessToken}}
+
 ### 게시글 등록
+POST {{baseUrl}}/articles
+Cookie: {{accessTokenName}}={{accessToken}}
+Content-Type: application/json
+
+{
+    "title":"Test_Article",
+    "content":"Test_Content"
+}
+
+### 게시글 수정
+PATCH {{baseUrl}}/articles/1
+Cookie: {{accessTokenName}}={{accessToken}}
+Content-Type: application/json
+
+{
+    "title":"Updated_Test_Article"
+}
+
+### 게시글 덧글 작성
+POST {{baseUrl}}/articles/comments/2
+Cookie: {{accessTokenName}}={{accessToken}}
+Content-Type: application/json
+
+{
+    "content":"Test_Comment"
+}
+
+
+### 게시글 삭제
+DELETE {{baseUrl}}/articles/1
+Cookie: {{accessTokenName}}={{accessToken}}

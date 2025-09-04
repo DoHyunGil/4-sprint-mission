@@ -5,7 +5,7 @@ const deleteArticle = async (req, res, next) => {
 
   try {
     await prisma.article.delete({
-      where: { id: reqId },
+      where: { id: reqId, ownerId: req.user.id },
     });
 
     res.status(200).json({ message: "Delete Success" });

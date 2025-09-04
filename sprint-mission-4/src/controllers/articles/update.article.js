@@ -5,7 +5,7 @@ const updateArticle = async (req, res, next) => {
 
   try {
     const result = await prisma.article.update({
-      where: { id: reqId },
+      where: { id: reqId, ownerId: req.user.id },
       data: req.body,
     });
 
