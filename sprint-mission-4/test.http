@@ -1,11 +1,12 @@
 @baseUrl=http://localhost:3000
 @accessTokenName=access-token
-@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU2OTUxODg0LCJleHAiOjE3NTY5NTU0ODR9.Ud58PLFFe_xO-O1PgMC0ipOu861fTGAsMf6S6bWuDQY
+@accessToken=
 @refreshTokenName=refresh-token
-@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU2OTQ5Mzk1LCJleHAiOjE3NTcwMzU3OTV9.SnJZtAPT2h7SMBFDs0yN3uL0hXf5maweIgVbb5SIM0g
+@refreshToken=
 @productId=
 @articleId=
 ### 회원가입
+@name getToken
 POST {{baseUrl}}/users/register
 Content-Type: application/json
 
@@ -27,6 +28,7 @@ Content-Type: application/json
 ### 로그아웃
 POST {{baseUrl}}/users/logout
 Cookie: {{accessTokenName}}={{accessToken}}
+
 
 ### 상품 등록
 POST {{baseUrl}}/products
