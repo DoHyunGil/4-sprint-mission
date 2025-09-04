@@ -3,7 +3,8 @@
 @accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU2OTUxODg0LCJleHAiOjE3NTY5NTU0ODR9.Ud58PLFFe_xO-O1PgMC0ipOu861fTGAsMf6S6bWuDQY
 @refreshTokenName=refresh-token
 @refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU2OTQ5Mzk1LCJleHAiOjE3NTcwMzU3OTV9.SnJZtAPT2h7SMBFDs0yN3uL0hXf5maweIgVbb5SIM0g
-
+@productId=
+@articleId=
 ### 회원가입
 POST {{baseUrl}}/users/register
 Content-Type: application/json
@@ -98,3 +99,13 @@ Cookie: {{accessTokenName}}={{accessToken}}
 ### 유저 프로필 조회
 GET {{baseUrl}}/users/profile
 Cookie: {{accessTokenName}}={{accessToken}}
+
+
+### 토큰 갱신
+GET {{baseUrl}}/users/refresh
+Cookie: {{refreshTokenName}}={{refreshToken}}
+
+### 상품 좋아요
+POST {{baseUrl}}/products/like
+Cookie: {{accessTokenName}}={{accessToken}}
+
