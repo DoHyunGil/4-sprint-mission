@@ -15,10 +15,26 @@ const getProductDetail = async (req, res, next) => {
         price: true,
         tags: true,
         createdAt: true,
+
+        likedUsers: {
+          where: { id: req.user.id },
+        },
       },
     });
 
-    res.status(200).send(product);
+    const isLiked = product.likedUsers.length > 0;
+
+    const result = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      tags: product.tags,
+      isLiked: isLiked,
+      createdAt: product.createdAt,
+    };
+
+    res.status(200).send(result);
   } catch (err) {
     next(err);
   }

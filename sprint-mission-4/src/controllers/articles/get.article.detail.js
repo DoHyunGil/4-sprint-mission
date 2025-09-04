@@ -4,7 +4,7 @@ const getArticleDetail = async (req, res, next) => {
   const reqId = Number(req.params.id);
 
   try {
-    const result = await prisma.article.findUniqueOrThrow({
+    const article = await prisma.article.findUniqueOrThrow({
       where: {
         id: reqId,
       },
@@ -13,8 +13,23 @@ const getArticleDetail = async (req, res, next) => {
         title: true,
         content: true,
         createdAt: true,
+        likedUsers: {
+          where: {
+            id: req.user.id,
+          },
+        },
       },
     });
+
+    const isLiked = article.likedUsers.length > 0;
+
+    const result = {
+      id: article.id,
+      name: article.title,
+      description: article.content,
+      isLiked: isLiked,
+      createdAt: article.createdAt,
+    };
 
     res.status(200).send(result);
   } catch (err) {

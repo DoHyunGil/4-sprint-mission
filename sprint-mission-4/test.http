@@ -1,12 +1,11 @@
 @baseUrl=http://localhost:3000
 @accessTokenName=access-token
-@accessToken=
+@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU2OTYwMzE5LCJleHAiOjE3NTY5NjM5MTl9.b-nEcwF--RqUp4F8KYPb6W6wzL9O5qUWekp3_uxSiq8
 @refreshTokenName=refresh-token
-@refreshToken=
-@productId=
+@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU2OTYwMzE5LCJleHAiOjE3NTcwNDY3MTl9.fH188Npr22DwNui966SZqgFjB_XgnYyCYbTBFunAjD4
+@productId=2
 @articleId=
 ### 회원가입
-@name getToken
 POST {{baseUrl}}/users/register
 Content-Type: application/json
 
@@ -29,7 +28,6 @@ Content-Type: application/json
 POST {{baseUrl}}/users/logout
 Cookie: {{accessTokenName}}={{accessToken}}
 
-
 ### 상품 등록
 POST {{baseUrl}}/products
 Cookie: {{accessTokenName}}={{accessToken}}
@@ -43,7 +41,7 @@ Content-Type: application/json
 }
 
 ### 상품 수정
-PATCH {{baseUrl}}/products/1
+PATCH {{baseUrl}}/products/{{productId}}
 Cookie: {{accessTokenName}}={{accessToken}}
 Content-Type: application/json
 
@@ -52,7 +50,7 @@ Content-Type: application/json
 }
 
 ### 상품 덧글 작성
-POST {{baseUrl}}/products/comments/2
+POST {{baseUrl}}/products/comments/{{productId}}
 Cookie: {{accessTokenName}}={{accessToken}}
 Content-Type: application/json
 
@@ -61,7 +59,7 @@ Content-Type: application/json
 }
 
 ###상품 삭제
-DELETE {{baseUrl}}/products/1
+DELETE {{baseUrl}}/products/{{productId}}
 Cookie: {{accessTokenName}}={{accessToken}}
 
 ### 게시글 등록
@@ -108,6 +106,9 @@ GET {{baseUrl}}/users/refresh
 Cookie: {{refreshTokenName}}={{refreshToken}}
 
 ### 상품 좋아요
-POST {{baseUrl}}/products/like
+POST {{baseUrl}}/products/likes/{{productId}}
 Cookie: {{accessTokenName}}={{accessToken}}
 
+### 상품 좋아요 목록 받기
+GET {{baseUrl}}/products/likes
+Cookie: {{accessTokenName}}={{accessToken}}

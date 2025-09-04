@@ -7,6 +7,8 @@ import createProductComment from "./post.product.comment.create.js";
 import createProduct from "./post.product.create.js";
 import updateProduct from "./update.product.js";
 import updateProductComment from "./update.product.comment.js";
+import ProductLike from "./post.product.like.js";
+import getLikeProducts from "./get.like.products.js";
 
 const productAPI = {
   createProduct,
@@ -18,6 +20,8 @@ const productAPI = {
   updateProductComment,
   deleteProduct,
   deleteProductComment,
+  ProductLike,
+  getLikeProducts,
 };
 
 Object.freeze(productAPI);

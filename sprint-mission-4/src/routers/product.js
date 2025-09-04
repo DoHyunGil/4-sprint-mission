@@ -22,11 +22,15 @@ router.post(
   API.createProductComment
 );
 
+router.post("/likes/:id", auth, API.ProductLike);
+
 router.get("/detail/:id", API.getProductDetail);
 
 router.get("/list", API.getProductList);
 
 router.get("/comments/:id", API.getProductComments);
+
+router.get("/likes", auth, API.getLikeProducts);
 
 router.patch("/:id", auth, productValidation.update, API.updateProduct);
 
