@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
+import type { ErrorRequestHandler } from "express";
 
-export default function ErrorHandler(err, req, res, next) {
+const ErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   console.error("에러 : " + err);
 
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
@@ -13,4 +14,6 @@ export default function ErrorHandler(err, req, res, next) {
   const message = err.message;
 
   res.status(status).send(`에러 메시지 : ${message}`);
-}
+};
+
+export default ErrorHandler;
