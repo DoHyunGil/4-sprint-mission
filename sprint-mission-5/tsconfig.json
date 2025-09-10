@@ -41,7 +41,8 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "allowJs": true,
-    "checkJs": false
+    "checkJs": false,
+    "esModuleInterop": true
   },
   "exclude": ["./prisma", "dist"]
 }

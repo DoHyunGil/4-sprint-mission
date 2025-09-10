@@ -1,20 +1,27 @@
 import jwt from "jsonwebtoken";
 import TOKEN from "./constants/jwt.tokens.js";
 import * as cookieOptions from "./cookie-options.js";
+import type { Request, Response } from "express";
+import type { AuthedUser, AuthReuqest } from "./passport/index.js";
 
-function generateAccessToken(user) {
+interface Tokens {
+  accessToken: string;
+  refreshToken: string;
+}
+
+function generateAccessToken(user: AuthedUser) {
   return jwt.sign({ id: user.id }, TOKEN.JWT_ACCESS_TOKEN_SECRET, {
     expiresIn: "1h",
   });
 }
 
-function generateRefreshToken(user) {
+function generateRefreshToken(user: AuthedUser) {
   return jwt.sign({ id: user.id }, TOKEN.JWT_REFRESH_TOKEN_SECRET, {
     expiresIn: "1d",
   });
 }
 
-function setTokenCookies(res, tokens) {
+function setTokenCookies(res: Response, tokens: Tokens) {
   res.cookie(
     TOKEN.ACCESS_TOKEN_COOKIE_NAME,
     tokens.accessToken,
@@ -27,7 +34,7 @@ function setTokenCookies(res, tokens) {
   );
 }
 
-export function setJwtTokens(req, res) {
+export function setJwtTokens(req: AuthReuqest, res: Response) {
   const user = req.user;
 
   const tokens = {
@@ -40,7 +47,7 @@ export function setJwtTokens(req, res) {
   return tokens;
 }
 
-export function clearJwtTokenCookies(res) {
+export function clearJwtTokenCookies(res: Response) {
   res.clearCookie(TOKEN.ACCESS_TOKEN_COOKIE_NAME);
   res.clearCookie(TOKEN.REFRESH_TOKEN_COOKIE_NAME);
 }

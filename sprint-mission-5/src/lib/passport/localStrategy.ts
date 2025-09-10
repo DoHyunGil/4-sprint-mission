@@ -1,4 +1,4 @@
-import LocalStrategy from "passport-local";
+const LocalStrategy = require("passport-local").Strategy;
 import prisma from "../prisma.js";
 import bcrypt from "bcrypt";
 
@@ -7,7 +7,7 @@ export const localStrategy = new LocalStrategy(
     usernameField: "email",
     passwordField: "password",
   },
-  async (email, password, done) => {
+  async (email: string, password: string, done: any) => {
     try {
       // console.log(`로그인 시도 : ${email}, ${password}`);
 
