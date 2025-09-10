@@ -1,9 +1,17 @@
+import type { NextFunction, Request, Response } from "express";
+import type { AuthReuqest } from "../../lib/passport/index.js";
 import prisma from "../../lib/prisma.js";
 
-export default async function getUserProfile(req, res, next) {
+export default async function getUserProfile(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const authReq = req as AuthReuqest;
+
   try {
     const user = await prisma.user.findUnique({
-      where: { id: req.user.id },
+      where: { id: authReq.user.id },
       select: {
         email: true,
         nickname: true,

@@ -1,19 +1,31 @@
 import prisma from "../../lib/prisma.js";
 import bcrypt from "bcrypt";
-import createError from "http-error";
+import createError from "http-errors";
+import type { AuthReuqest } from "../../lib/passport/index.js";
+import type { NextFunction, Request, Response } from "express";
 
-export default async function updateUserChangePassword(req, res, next) {
+export default async function updateUserChangePassword(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const authReq = req as AuthReuqest;
+
   try {
-    const password = req.body.password;
+    const password = authReq.body.password;
 
     const data = await prisma.user.findUnique({
       where: {
-        id: req.user.id,
+        id: authReq.user.id,
       },
       select: {
         password,
       },
     });
+
+    if (!data) {
+      return next(createError(404, "유저를 찾을 수 없습니다."));
+    }
 
     const isPasswordValid = await bcrypt.compare(password, data.password);
 
@@ -23,7 +35,7 @@ export default async function updateUserChangePassword(req, res, next) {
 
     await prisma.user.update({
       where: {
-        id: req.user.id,
+        id: authReq.user.id,
       },
       data: {
         password: password,
