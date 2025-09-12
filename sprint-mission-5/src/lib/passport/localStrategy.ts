@@ -1,7 +1,8 @@
-const LocalStrategy = require("passport-local").Strategy;
+import passportLocal from "passport-local";
 import prisma from "../prisma.js";
 import bcrypt from "bcrypt";
 
+const LocalStrategy = passportLocal.Strategy;
 export const localStrategy = new LocalStrategy(
   {
     usernameField: "email",
