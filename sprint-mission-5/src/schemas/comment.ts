@@ -1,5 +1,6 @@
 import { z } from "zod";
 import createError from "http-errors";
+import type { NextFunction, Request, Response } from "express";
 
 const createSchema = z
   .object({
@@ -7,7 +8,7 @@ const createSchema = z
   })
   .strict();
 
-export function create(req, res, next) {
+export function create(req: Request, res: Response, next: NextFunction) {
   const result = createSchema.safeParse(req.body);
 
   if (result.success) {
