@@ -1,1 +1,1 @@
-{"version":3,"file":"article.d.ts","sourceRoot":"","sources":["../../src/routers/article.js"],"names":[],"mappings":";AAQA,0BAAgC"}
+{"version":3,"file":"article.d.ts","sourceRoot":"","sources":["../../src/routers/article.ts"],"names":[],"mappings":"AAQA,QAAA,MAAM,MAAM,4CAAmB,CAAC;AAqChC,eAAe,MAAM,CAAC"}

@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client";
-export default function ErrorHandler(err, req, res, next) {
+const ErrorHandler = (err, req, res, next) => {
     console.error("에러 : " + err);
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
         if (err.code === "P2025") {
@@ -9,5 +9,6 @@ export default function ErrorHandler(err, req, res, next) {
     const status = Number(err.status);
     const message = err.message;
     res.status(status).send(`에러 메시지 : ${message}`);
-}
+};
+export default ErrorHandler;
 //# sourceMappingURL=errorHandler.js.map

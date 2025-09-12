@@ -1,7 +1,11 @@
 import prisma from "../../lib/prisma.js";
+import createError from "http-errors";
 const createArticleComment = async (req, res, next) => {
     try {
         const reqId = Number(req.params.id);
+        if (!req.user) {
+            return next(createError(401, "Unauthorized"));
+        }
         const article = await prisma.article.findUnique({
             where: { id: reqId, ownerId: req.user.id },
         });

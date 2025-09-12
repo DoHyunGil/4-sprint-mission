@@ -1,5 +1,5 @@
 import prisma from "../../lib/prisma.js";
-import type { AuthReuqest } from "../../lib/passport/index.js";
+
 import type { NextFunction, Request, Response } from "express";
 
 const getArticleList = async (

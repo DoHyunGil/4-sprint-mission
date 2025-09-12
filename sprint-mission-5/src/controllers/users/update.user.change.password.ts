@@ -1,7 +1,6 @@
 import prisma from "../../lib/prisma.js";
 import bcrypt from "bcrypt";
 import createError from "http-errors";
-import type { AuthReuqest } from "../../lib/passport/index.js";
 import type { NextFunction, Request, Response } from "express";
 
 export default async function updateUserChangePassword(
@@ -9,14 +8,15 @@ export default async function updateUserChangePassword(
   res: Response,
   next: NextFunction
 ) {
-  const authReq = req as AuthReuqest;
-
   try {
-    const password = authReq.body.password;
+    const password = req.body.password;
+    if (!req.user) {
+      return next(createError(401, "Unauthorized"));
+    }
 
     const data = await prisma.user.findUnique({
       where: {
-        id: authReq.user.id,
+        id: req.user.id,
       },
       select: {
         password,
@@ -35,7 +35,7 @@ export default async function updateUserChangePassword(
 
     await prisma.user.update({
       where: {
-        id: authReq.user.id,
+        id: req.user.id,
       },
       data: {
         password: password,

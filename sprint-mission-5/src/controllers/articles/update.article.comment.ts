@@ -1,5 +1,5 @@
 import prisma from "../../lib/prisma.js";
-import type { AuthReuqest } from "../../lib/passport/index.js";
+import createError from "http-errors";
 import type { NextFunction, Request, Response } from "express";
 
 const updateArticleComment = async (
@@ -8,11 +8,13 @@ const updateArticleComment = async (
   next: NextFunction
 ) => {
   const reqId = Number(req.params.id);
-  const authReq = req as AuthReuqest;
+  if (!req.user) {
+    return next(createError(401, "Unauthorized"));
+  }
 
   try {
     const result = await prisma.comment.update({
-      where: { id: reqId, ownerId: authReq.user.id },
+      where: { id: reqId, ownerId: req.user.id },
       data: {
         content: req.body.content,
       },

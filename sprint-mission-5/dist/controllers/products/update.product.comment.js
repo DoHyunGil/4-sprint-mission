@@ -1,6 +1,10 @@
 import prisma from "../../lib/prisma.js";
+import createError from "http-errors";
 const updateProductComment = async (req, res, next) => {
     const reqId = Number(req.params.id);
+    if (!req.user) {
+        return next(createError(401, "Unauthorized"));
+    }
     try {
         const result = await prisma.comment.update({
             where: { id: reqId, ownerId: req.user.id },

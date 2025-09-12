@@ -1,3 +1,4 @@
+import type { NextFunction, Request, Response } from "express";
+declare function userTokenRefresh(req: Request, res: Response, next: NextFunction): void;
 export default userTokenRefresh;
-declare function userTokenRefresh(req: any, res: any, next: any): void;
 //# sourceMappingURL=get.user.token.refresh.d.ts.map

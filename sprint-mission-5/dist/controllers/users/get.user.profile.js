@@ -1,5 +1,9 @@
+import createError from "http-errors";
 import prisma from "../../lib/prisma.js";
 export default async function getUserProfile(req, res, next) {
+    if (!req.user) {
+        return next(createError(401, "Unauthorized"));
+    }
     try {
         const user = await prisma.user.findUnique({
             where: { id: req.user.id },

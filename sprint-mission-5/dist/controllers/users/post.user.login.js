@@ -5,10 +5,9 @@ export default function loginUser(req, res, next) {
         console.log("로그인 시도");
         if (err)
             return next(err);
-        if (!user)
+        if (!req.user)
             return res.status(401).json({ message: "로그인 실패, 유저 없음" });
-        req.user = user;
-        const tokens = setJwtTokens(req, res);
+        const tokens = setJwtTokens(String(req.user.id), res);
         res.status(200).json({
             message: "로그인",
             data: {

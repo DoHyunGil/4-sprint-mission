@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import type { AuthReuqest } from "../../lib/passport/index.js";
+import createError from "http-errors";
 import prisma from "../../lib/prisma.js";
 
 export default async function getUserProfile(
@@ -7,11 +7,13 @@ export default async function getUserProfile(
   res: Response,
   next: NextFunction
 ) {
-  const authReq = req as AuthReuqest;
+  if (!req.user) {
+    return next(createError(401, "Unauthorized"));
+  }
 
   try {
     const user = await prisma.user.findUnique({
-      where: { id: authReq.user.id },
+      where: { id: req.user.id },
       select: {
         email: true,
         nickname: true,

@@ -1,7 +1,16 @@
 import prisma from "../../lib/prisma.js";
+import createError from "http-errors";
+import type { NextFunction, Request, Response } from "express";
 
-const deleteProduct = async (req, res, next) => {
+const deleteProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const reqId = Number(req.params.id);
+  if (!req.user) {
+    return next(createError(401, "Unauthorized"));
+  }
 
   try {
     await prisma.product.delete({

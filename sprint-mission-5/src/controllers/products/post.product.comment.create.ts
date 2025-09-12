@@ -1,8 +1,18 @@
 import prisma from "../../lib/prisma.js";
+import createError from "http-errors";
+import type { NextFunction, Request, Response } from "express";
 
-const createProductComment = async (req, res, next) => {
+const createProductComment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const reqId = Number(req.params.id);
+    if (!req.user) {
+      return next(createError(401, "Unauthorized"));
+    }
+
     const product = await prisma.product.findUnique({
       where: { id: reqId, ownerId: req.user.id },
     });

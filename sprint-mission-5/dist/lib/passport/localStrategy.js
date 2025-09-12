@@ -1,4 +1,4 @@
-import LocalStrategy from "passport-local";
+const LocalStrategy = require("passport-local").Strategy;
 import prisma from "../prisma.js";
 import bcrypt from "bcrypt";
 export const localStrategy = new LocalStrategy({

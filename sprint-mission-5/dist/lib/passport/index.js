@@ -1,5 +1,4 @@
 import passport from "passport";
-import prisma from "../prisma.js";
 import { localStrategy } from "./localStrategy.js";
 import { accessTokenStrategy, refreshTokenStrategy } from "./jwtStrategy.js";
 import TOKEN from "../constants/jwt.tokens.js";

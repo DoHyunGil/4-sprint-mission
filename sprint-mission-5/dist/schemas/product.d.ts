@@ -1,10 +1,11 @@
-export function create(req: any, res: any, next: any): void;
-export function update(req: any, res: any, next: any): void;
-export const updateSchema: z.ZodObject<{
+import { z } from "zod";
+import type { NextFunction, Request, Response } from "express";
+export declare const updateSchema: z.ZodObject<{
     name: z.ZodOptional<z.ZodString>;
     description: z.ZodOptional<z.ZodString>;
     price: z.ZodOptional<z.ZodNumber>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>;
-import { z } from "zod";
+export declare function create(req: Request, res: Response, next: NextFunction): void;
+export declare function update(req: Request, res: Response, next: NextFunction): void;
 //# sourceMappingURL=product.d.ts.map

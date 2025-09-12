@@ -1,6 +1,7 @@
-import type { AuthReuqest } from "../../lib/passport/index.js";
+//
 import type { NextFunction, Request, Response } from "express";
 import prisma from "../../lib/prisma.js";
+import creaetError from "http-errors";
 
 const deleteArticleComment = async (
   req: Request,
@@ -8,11 +9,13 @@ const deleteArticleComment = async (
   next: NextFunction
 ) => {
   const reqId = Number(req.params.id);
-  const authReq = req as AuthReuqest;
+  if (!req.user) {
+    return next(creaetError(401, "Unauthorized"));
+  }
 
   try {
     await prisma.comment.delete({
-      where: { id: reqId, ownerId: authReq.user.id },
+      where: { id: reqId, ownerId: req.user.id },
     });
 
     res.status(200).json({ message: "Delete Success" });

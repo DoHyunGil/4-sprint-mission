@@ -1,5 +1,5 @@
 import prisma from "../../lib/prisma.js";
-import type { AuthReuqest } from "../../lib/passport/index.js";
+import createError from "http-errors";
 import type { NextFunction, Request, Response } from "express";
 
 const getArticleDetail = async (
@@ -8,7 +8,9 @@ const getArticleDetail = async (
   next: NextFunction
 ) => {
   const reqId = Number(req.params.id);
-  const authReq = req as AuthReuqest;
+  if (!req.user) {
+    return next(createError(401, "Unauthorized"));
+  }
 
   try {
     const article = await prisma.article.findUniqueOrThrow({
@@ -22,7 +24,7 @@ const getArticleDetail = async (
         createdAt: true,
         likedUsers: {
           where: {
-            id: authReq.user.id,
+            id: req.user.id,
           },
         },
       },

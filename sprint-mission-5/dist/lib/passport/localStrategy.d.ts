@@ -1,2 +1,2 @@
-export const localStrategy: any;
+export declare const localStrategy: any;
 //# sourceMappingURL=localStrategy.d.ts.map

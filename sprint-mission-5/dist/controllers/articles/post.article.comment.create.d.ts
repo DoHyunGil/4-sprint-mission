@@ -1,3 +1,4 @@
+import type { NextFunction, Request, Response } from "express";
+declare const createArticleComment: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 export default createArticleComment;
-declare function createArticleComment(req: any, res: any, next: any): Promise<any>;
 //# sourceMappingURL=post.article.comment.create.d.ts.map

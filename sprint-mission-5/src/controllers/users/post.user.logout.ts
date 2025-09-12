@@ -1,5 +1,4 @@
 import type { NextFunction, Request, Response } from "express";
-import type { AuthReuqest } from "../../lib/passport/index.js";
 import { clearJwtTokenCookies } from "../../lib/token.js";
 import createHttpError from "http-errors";
 
@@ -8,10 +7,7 @@ export default function logoutUser(
   res: Response,
   next: NextFunction
 ) {
-  const authReq = req as AuthReuqest;
-  console.log("유저 정보 수신 : " + authReq.user.id);
-
-  if (!authReq.user) {
+  if (!req.user) {
     return next(createHttpError(401, "비인가 유저"));
   }
 

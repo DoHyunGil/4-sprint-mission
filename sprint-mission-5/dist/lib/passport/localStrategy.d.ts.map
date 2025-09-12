@@ -1,1 +1,1 @@
-{"version":3,"file":"localStrategy.d.ts","sourceRoot":"","sources":["../../../src/lib/passport/localStrategy.js"],"names":[],"mappings":"AAIA,gCA0BE"}
+{"version":3,"file":"localStrategy.d.ts","sourceRoot":"","sources":["../../../src/lib/passport/localStrategy.ts"],"names":[],"mappings":"AAIA,eAAO,MAAM,aAAa,KA0BzB,CAAC"}

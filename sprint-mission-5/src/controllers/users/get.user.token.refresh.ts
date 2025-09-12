@@ -1,11 +1,14 @@
 import type { NextFunction, Request, Response } from "express";
-import type { AuthReuqest } from "../../lib/passport/index.js";
+import createError from "http-errors";
 import { setJwtTokens } from "../../lib/token.js";
 
 function userTokenRefresh(req: Request, res: Response, next: NextFunction) {
+  if (!req.user) {
+    return next(createError(401, "Unauthorized"));
+  }
+
   try {
-    const authReq = req as AuthReuqest;
-    const tokens = setJwtTokens(authReq, res);
+    const tokens = setJwtTokens(String(req.user.id), res);
 
     res.status(200).json({
       message: "세션 갱신",

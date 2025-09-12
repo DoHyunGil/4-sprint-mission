@@ -1,3 +1,4 @@
+import type { NextFunction, Request, Response } from "express";
+declare const deleteProductComment: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 export default deleteProductComment;
-declare function deleteProductComment(req: any, res: any, next: any): Promise<void>;
 //# sourceMappingURL=delete.product.comment.d.ts.map

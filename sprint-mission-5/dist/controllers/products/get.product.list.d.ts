@@ -1,3 +1,4 @@
+import type { NextFunction, Request, Response } from "express";
+declare const getProductList: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 export default getProductList;
-declare function getProductList(req: any, res: any): Promise<void>;
 //# sourceMappingURL=get.product.list.d.ts.map

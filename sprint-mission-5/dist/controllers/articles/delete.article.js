@@ -1,6 +1,10 @@
 import prisma from "../../lib/prisma.js";
+import createError from "http-errors";
 const deleteArticle = async (req, res, next) => {
     const reqId = Number(req.params.id);
+    if (!req.user) {
+        return next(createError(401, "Unauthorized"));
+    }
     try {
         await prisma.article.delete({
             where: { id: reqId, ownerId: req.user.id },

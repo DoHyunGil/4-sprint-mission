@@ -1,3 +1,4 @@
+import type { NextFunction, Request, Response } from "express";
+declare const getArticleList: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 export default getArticleList;
-declare function getArticleList(req: any, res: any): Promise<void>;
 //# sourceMappingURL=get.article.list.d.ts.map

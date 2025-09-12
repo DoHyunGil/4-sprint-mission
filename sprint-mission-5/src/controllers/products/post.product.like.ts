@@ -1,7 +1,16 @@
 import prisma from "../../lib/prisma.js";
-import createError from "http-error";
+import createError from "http-errors";
+import type { NextFunction, Request, Response } from "express";
 
-export default async function ProductLike(req, res, next) {
+export default async function ProductLike(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  if (!req.user) {
+    return next(createError(401, "Unauthorized"));
+  }
+
   try {
     const productId = Number(req.params.id);
 
@@ -20,7 +29,7 @@ export default async function ProductLike(req, res, next) {
     if (!product) {
       next(createError(404, "제품을 찾을 수 없습니다."));
     }
-    if (!product.likedUsers.length > 0) {
+    if (!(product.likedUsers.length > 0)) {
       likeProduct(productId, req.user.id);
       return res
         .status(200)
@@ -36,7 +45,7 @@ export default async function ProductLike(req, res, next) {
   }
 }
 
-async function likeProduct(productId, userId) {
+async function likeProduct(productId: number, userId: number) {
   const result = await prisma.product.update({
     where: {
       id: productId,
@@ -50,7 +59,7 @@ async function likeProduct(productId, userId) {
     },
   });
 }
-async function unLikeProduct(productId, userId) {
+async function unLikeProduct(productId: number, userId: number) {
   const result = await prisma.product.update({
     where: {
       id: productId,

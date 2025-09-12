@@ -1,3 +1,4 @@
+import type { NextFunction, Request, Response } from "express";
+declare const updateProductComment: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 export default updateProductComment;
-declare function updateProductComment(req: any, res: any, next: any): Promise<void>;
 //# sourceMappingURL=update.product.comment.d.ts.map

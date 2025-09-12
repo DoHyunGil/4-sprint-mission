@@ -1,18 +1,17 @@
 import prisma from "../../lib/prisma.js";
 import type { NextFunction, Request, Response } from "express";
 
-const getArticleComment = async (
+const getProductComments = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const reqId = Number(req.params.id);
   let cursor = 1;
-
   try {
     if (req.query.cursor) cursor = Number(req.query.cursor);
 
-    const result = await prisma.article.findMany({
+    const result = await prisma.product.findMany({
       where: {
         id: reqId,
       },
@@ -31,4 +30,4 @@ const getArticleComment = async (
   }
 };
 
-export default getArticleComment;
+export default getProductComments;

@@ -1,5 +1,9 @@
 import prisma from "../../lib/prisma.js";
+import createError from "http-errors";
 const createProduct = async (req, res, next) => {
+    if (!req.user) {
+        return next(createError(401, "Unauthorized"));
+    }
     try {
         const product = await prisma.product.create({
             data: {

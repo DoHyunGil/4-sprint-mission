@@ -2,14 +2,13 @@ import passport from "passport";
 import { localStrategy } from "./localStrategy.js";
 import { accessTokenStrategy, refreshTokenStrategy } from "./jwtStrategy.js";
 import TOKEN from "../constants/jwt.tokens.js";
-import type { Request } from "express";
-import type { User } from "@prisma/client";
 
-export interface AuthReuqest extends Request {
-  user: AuthedUser;
-}
-export interface AuthedUser {
-  id: number;
+declare module "express-serve-static-core" {
+  interface Request {
+    user?: {
+      id: number;
+    };
+  }
 }
 
 passport.use("local", localStrategy);

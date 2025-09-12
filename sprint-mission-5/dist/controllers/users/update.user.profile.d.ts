@@ -1,3 +1,4 @@
+import type { NextFunction, Request, Response } from "express";
+declare const updateUserProfile: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 export default updateUserProfile;
-declare function updateUserProfile(req: any, res: any, next: any): Promise<void>;
 //# sourceMappingURL=update.user.profile.d.ts.map
