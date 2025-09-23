@@ -1,7 +1,6 @@
-//
 import type { NextFunction, Request, Response } from "express";
 import prisma from "../../lib/prisma.js";
-import creaetError from "http-errors";
+import createError from "http-errors";
 
 const deleteArticleComment = async (
   req: Request,
@@ -10,7 +9,7 @@ const deleteArticleComment = async (
 ) => {
   const reqId = Number(req.params.id);
   if (!req.user) {
-    return next(creaetError(401, "Unauthorized"));
+    return next(createError(401, "Unauthorized"));
   }
 
   try {
