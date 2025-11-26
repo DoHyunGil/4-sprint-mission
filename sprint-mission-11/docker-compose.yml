@@ -1,0 +1,39 @@
+version: "1.0"
+
+services:
+  # 🌐 Express 서버 서비스 정의
+  web:
+    # 현재 디렉토리의 Dockerfile을 사용하여 이미지 빌드
+    build: .
+    container_name: express_server
+    ports:
+      - "3000:3000"
+    volumes:
+      # 'express_uploads' 볼륨을 컨테이너 내부의 '/usr/src/app/uploads' 경로에 마운트
+      - express_uploads:/app/uploads
+
+    environment:
+      NODE_ENV: production
+      # DB_HOST는 서비스 이름인 'db'를 사용 (Docker 내부 DNS)
+      DB_HOST: db
+      DB_USER: Dokcer_User
+      DB_PASSWORD: dockeruser
+      DB_NAME: postgres
+      DB_PORT: 5432
+
+    # db 서비스가 web 서비스보다 먼저 시작되도록 설정
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine # 경량 Postgres 이미지 사용
+    container_name: postgres_server_db
+    restart: always # 컨테이너 실패 시 재시작
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    # 데이터베이스 접속 정보 환경 변수 설정
+    environment:
+      POSTGRES_USER: MY_USER
+      POSTGRES_PASSWORD: MY_PASSWORD
+      POSTGRES_DB: MY_DB
